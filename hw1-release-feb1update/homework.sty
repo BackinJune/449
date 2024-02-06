@@ -1,0 +1,81 @@
+\ProvidesPackage{homework}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Other shortcuts
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\EE{\mathbb{E}}
+\def\RR{\mathbb{R}}
+\def\PP{\mathbb{P}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Loop shortcuts %%
+%% Taken from CS 446 sp 2022
+%% credited there to djhsu %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\balpha{\boldsymbol{\alpha}}
+% following loops stolen from djhsu
+\def\ddefloop#1{\ifx\ddefloop#1\else\ddef{#1}\expandafter\ddefloop\fi}
+% \bbA, \bbB, ...
+\def\ddef#1{\expandafter\def\csname bb#1\endcsname{\ensuremath{\mathbb{#1}}}}
+\ddefloop ABCDEFGHIJKLMNOP_iQRSTUVWXYZ\ddefloop
+
+% \cA, \cB, ...
+\def\ddef#1{\expandafter\def\csname c#1\endcsname{\ensuremath{\mathcal{#1}}}}
+\ddefloop ABCDEFGHIJKLMNOP_iQRSTUVWXYZ\ddefloop
+
+% \vA, \vB, ..., \va, \vb, ...
+\def\ddef#1{\expandafter\def\csname v#1\endcsname{\ensuremath{\boldsymbol{#1}}}}
+\ddefloop ABCDEFGHIJKLMNOP_iQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\ddefloop
+\def\vzero{\mathbf{0}}
+\def\vone{\mathbf{1}}
+
+% \valpha, \vbeta, ...,  \vGamma, \vDelta, ...,
+\def\ddef#1{\expandafter\def\csname v#1\endcsname{\ensuremath{\boldsymbol{\csname #1\endcsname}}}}
+\ddefloop {alpha}{beta}{gamma}{delta}{epsilon}{varepsilon}{zeta}{eta}{theta}{vartheta}{iota}{kappa}{lambda}{mu}{nu}{xi}{pi}{varpi}{rho}{varrho}{sigma}{varsigma}{tau}{upsilon}{phi}{varphi}{chi}{psi}{omega}{Gamma}{Delta}{Theta}{Lambda}{Xi}{P_ii}{Sigma}{varSigma}{Upsilon}{P_ihi}{P_isi}{Omega}{ell}\ddefloop
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Backend %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
+\usepackage{lipsum}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Formatting %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{anyfontsize}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{titling}
+\usepackage{geometry}      
+\usepackage{setspace}
+\usepackage[sorting=none]{biblatex}
+\usepackage{xsim} % for hiding solutions
+\usepackage[parfill]{parskip}
+\usepackage{setspace}
+
+
+%%% todonotes
+\usepackage{todonotes}
+\setuptodonotes{inline, color=yellow!50}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Graphics %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{wrapfig2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Math & Symbols %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{gensymb}
+\usepackage{siunitx}
+\usepackage{amsthm, amsmath, amssymb, amsthm,mathtools} 
+
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{argmin}
+
