@@ -80,13 +80,13 @@ since both $P(``not"|positive)$ and $P(``good"|negative)$ are adequately high bu
 \begin{enumerate}
     \item 2, which happens in the case that the closest two vectorsa in different class are
     selected and there's only such 2 points in $\mathcal{D}$ belonging to different classes that have such distance between each other.
-    \item The largest possible \bf{TO BE DONE}
-    \item (a) $\phi(\vx) = (x_1^2, x_2^2, \sqrt2x_1x_2, \sqrt2x_1, \sqrt2x_2, 1)$\\
-    (b) \\
-    $\phi(-1, -1) = (1, 1, \sqrt2, -\sqrt2, -\sqrt2, 1)$\\
-    $\phi(1, 1) = (1, 1, \sqrt2, \sqrt2, \sqrt2, \sqrt2, 1)$\\
-    $\phi(1, -1) = (1, 1, -\sqrt2, \sqrt2, -\sqrt2, 1)$\\
-    $\phi(-1, 1) = (1, 1, -\sqrt2, -\sqrt2, \sqrt2, 1)$\\
+    \item The largest possible \textbf{TO BE DONE}
+    \item (a) \[\phi(\vx) = (x_1^2, x_2^2, \sqrt2x_1x_2, \sqrt2x_1, \sqrt2x_2, 1)\]
+    (b)
+    \[\phi(-1, -1) = (1, 1, \sqrt2, -\sqrt2, -\sqrt2, 1)\]
+    \[\phi(1, 1) = (1, 1, \sqrt2, \sqrt2, \sqrt2, \sqrt2, 1)\]
+    \[\phi(1, -1) = (1, 1, -\sqrt2, \sqrt2, -\sqrt2, 1)\]
+    \[\phi(-1, 1) = (1, 1, -\sqrt2, -\sqrt2, \sqrt2, 1)\]
     Therefore, $\vw$ can be $(0, 0, 1, 0, 0, 0)$.
 \end{enumerate}
 
@@ -98,7 +98,7 @@ since both $P(``not"|positive)$ and $P(``good"|negative)$ are adequately high bu
     \[P(y=+1|\vx) = \frac{P(\vx|y=+1) \cdot p}{P(\vx)} = \frac{P(\vx|y=+1) \cdot p}{P(\vx|y=+1) \cdot p + P(\vx|y=-1) \cdot (1-p)}\]
     Therefore, for $B = P(\vx|y=+1) \cdot p$ and $A = P(\vx|y=-1) \cdot (1-p)$, 
     \[P(y=+1|\vx) = \frac{1}{1+\text{exp}(\log\frac{A}{B})}\]
-    \item \bf{TO BE DONE}
+    \item \textbf{TO BE DONE}
     \item \[P(y|\vx) = \frac{1}{1 + \text{exp}(y\cdot(\vw^{\top}\vx+b))}\]
 \end{enumerate}
 
