@@ -49,10 +49,10 @@ since both $P(``not"|positive)$ and $P(``good"|negative)$ are adequately high bu
 \begin{enumerate}
     \item $X$ can be considered as a linear transform from $\mathbb{R}^n$ to 
     $\mathbb{R}^d$. Thus, it complies to the Rank-Nullity Theorem: 
-    \[\text{rank}(X) + \text{nullity}(X) = n\]
-    in which the dimention of the input space is $n$ and $\text{rank}(X) = n$.\\
+    \[\text{rank}(X) + \text{nullity}(X) = \text{dim}(\text{domain}(X))\]
+    in which the dimention of the input space for $X$ is $n$ and $\text{rank}(X) = n$.\\
     Therefore, $\text{nullity}(X) = 0$, which indicates that $X$ is invertible. Thus,
-    there exists\\ $\textbf{\textit{w}} = X^{-1}\textbf{\textit{y}}$ such that satisfies
+    there exists\\ $\textbf{\textit{w}} = X^{-1}\textbf{\textit{y}}$ such that 
     $X\textbf{\textit{w}} = \textbf{\textit{y}}$.
     \item Since the number of non-zero singular values of $A$ equals to $\text{rank}(A)$, 
     $\Sigma$ is a diagonal matrix consists of positive singular values of $A$, and $X$
@@ -72,7 +72,7 @@ since both $P(``not"|positive)$ and $P(``good"|negative)$ are adequately high bu
     $X^{\top}:\mathbb{R}^n \rightarrow \mathbb{R}^d$ and 
     $XX^{\top}: \mathbb{R}^n \rightarrow \mathbb{R}^n$, 
     $\text{rank}(XX^{\top}) = \text{rank}(X^{\top}) = \text{rank}(X) = n$. 
-    Thus, $XX^{\top}$ is a full-rank square matrix, \textit{i.e.}, $XX^{\top}$ is invertible.
+    Therefore, $XX^{\top}$ is a full-rank square matrix, and thus $XX^{\top}$ is invertible.
 \end{enumerate}
 
 %3
@@ -80,13 +80,16 @@ since both $P(``not"|positive)$ and $P(``good"|negative)$ are adequately high bu
 \begin{enumerate}
     \item 2, which happens in the case that the closest two vectorsa in different class are
     selected and there's only such 2 points in $\mathcal{D}$ belonging to different classes that have such distance between each other.
-    \item The largest possible \bf{TO BE DONE}
-    \item (a) $\phi(\vx) = (x_1^2, x_2^2, \sqrt2x_1x_2, \sqrt2x_1, \sqrt2x_2, 1)$\\
-    (b) \\
-    $\phi(-1, -1) = (1, 1, \sqrt2, -\sqrt2, -\sqrt2, 1)$\\
-    $\phi(1, 1) = (1, 1, \sqrt2, \sqrt2, \sqrt2, \sqrt2, 1)$\\
-    $\phi(1, -1) = (1, 1, -\sqrt2, \sqrt2, -\sqrt2, 1)$\\
-    $\phi(-1, 1) = (1, 1, -\sqrt2, -\sqrt2, \sqrt2, 1)$\\
+    \item With optimal $\vw^*=\sum_{i\in[n]}\alpha_i^{*}y_i \vx_i$,
+    $(\vx_i,y_i)$ is a support vector if and only if\\
+    $y_i\left(\sum_{j\in[n]}\alpha_j^{*}y_j\vx^{\top}_j\right)\vx_i = 1$, that is, $\sum_{j\in[n]}\alpha_j^{*}(y_j\vx_j)^{\top} = \left(\vX\boldsymbol{\alpha^*}\right)^{\top} = \dfrac{\vx_i^{-1}}{y_i}$, in which both $\vX$ and $\dfrac{\vx_i^{-1}}{y_i}$ are fixed, while $\boldsymbol{\alpha^*}$ serve as a linear combination might be with multiple optimal solutions.
+    It's possible that this mapping stands while $\alpha_i=0$, in which case $\vx_i$ is indeed a support vector while hasn't been observed. However, if the vector $\vx_i$ is observed with a non-zero $\alpha_i$, it's sure to be a support vector. Therefore, the smallest possible number of support vectors in $\mathcal{D}$ is 3 and the largest possible number of support vectors in $\mathcal{D}$ would be $n$.
+    \item (a) \[\phi(\vx) = (x_1^2, x_2^2, \sqrt2x_1x_2, \sqrt2x_1, \sqrt2x_2, 1)\]
+    (b)
+    \[\phi(-1, -1) = (1, 1, \sqrt2, -\sqrt2, -\sqrt2, 1)\]
+    \[\phi(1, 1) = (1, 1, \sqrt2, \sqrt2, \sqrt2, 1)\]
+    \[\phi(1, -1) = (1, 1, -\sqrt2, \sqrt2, -\sqrt2, 1)\]
+    \[\phi(-1, 1) = (1, 1, -\sqrt2, -\sqrt2, \sqrt2, 1)\]
     Therefore, $\vw$ can be $(0, 0, 1, 0, 0, 0)$.
 \end{enumerate}
 
@@ -94,15 +97,27 @@ since both $P(``not"|positive)$ and $P(``good"|negative)$ are adequately high bu
 \section{Gaussian Naive Bayes: 15pts}
 \begin{enumerate}
     \item 
-    \[\frac{1}{1+\text{exp}(\log\frac{A}{B})} = \frac{B}{B+A}\]
+    \[\frac{1}{1+\exp(\log\frac{A}{B})} = \frac{B}{B+A}\]
     \[P(y=+1|\vx) = \frac{P(\vx|y=+1) \cdot p}{P(\vx)} = \frac{P(\vx|y=+1) \cdot p}{P(\vx|y=+1) \cdot p + P(\vx|y=-1) \cdot (1-p)}\]
     Therefore, for $B = P(\vx|y=+1) \cdot p$ and $A = P(\vx|y=-1) \cdot (1-p)$, 
-    \[P(y=+1|\vx) = \frac{1}{1+\text{exp}(\log\frac{A}{B})}\]
-    \item \bf{TO BE DONE}
-    \item \[P(y|\vx) = \frac{1}{1 + \text{exp}(y\cdot(\vw^{\top}\vx+b))}\]
+    \[P(y=+1|\vx) = \frac{1}{1+\exp(\log\frac{A}{B})}\]
+    \item \[P(y=+1|\vx) = \frac{P(\vx|y=+1) \cdot p}{P(\vx)}\] 
+    \[= \frac{\displaystyle \prod_{i=1}^{d}P(x_i|y=+1)\cdot p}{\displaystyle \prod_{i=1}^{d}P(x_i|y=+1)\cdot p + \prod_{i=1}^{d}P(x_i|y=-1)\cdot (1-p)}\]
+    \[= \frac{1}{1+\exp\left(\log\frac{\displaystyle\prod_{i=1}^{d}P(x_i|y=-1)\cdot (1-p)}{\displaystyle\prod_{i=1}^{d}P(x_i|y=+1)\cdot p}\right)}\]
+    Since $P(x_j|y=+1) = \frac{1}{\sqrt{2\pi}}\exp(\frac{-(x_j-\mu_{+,j})^2}{2})$, we have:
+    \[\frac{P(x_j|y=-1)}{P(x_j|y=+1)} = \exp\left(\frac{-(x_j-\mu_{-,j})^2+(x_j-\mu_{+,j})^2}{2}\right)\] and thus:
+    \[\log\frac{A}{B} = \log\frac{\displaystyle\prod_{i=1}^{d}P(x_i|y=-1)\cdot (1-p)}{\displaystyle\prod_{i=1}^{d}P(x_i|y=+1)\cdot p}\] 
+    \[= \log\frac{1-p}{p} + \frac{1}{2}\sum_{i=1}^{d}-(x_i-\mu_{-,i})^2+(x_i-\mu_{+,i})^2\]
+    \[= \log\frac{1-p}{p} + \frac{1}{2}\sum_{i=1}^{d}(2x_i-\mu_{-,i}-\mu_{+,i})(\mu_{-,i} - \mu_{+i})\]
+    \[= \log\frac{1-p}{p} + \sum_{i=1}^{d}x_i\cdot(\mu_{-,i} - \mu_{+,i}) - \frac{1}{2}\sum_{i=1}^d(\mu_{-,i}+\mu_{+,i})(\mu_{-,i} - \mu_{+,i})\]
+    \[= (\boldsymbol{\mu_-^{\top}} - \boldsymbol{\mu_+^{\top}})\vx + \frac{1}{2}(\boldsymbol{\mu_+^{\top}}\boldsymbol{\mu_+} - \boldsymbol{\mu_-^{\top}}\boldsymbol{\mu_-}) + \log\left(\frac{1}{p} - 1 \right)\]
+    \[= \vw^{\top}\vx + b\] with $\vw=\boldsymbol{\mu_-} - \boldsymbol{\mu_+}$ and $b = \frac{1}{2}(\boldsymbol{\mu_+^{\top}}\boldsymbol{\mu_+} - \boldsymbol{\mu_-^{\top}}\boldsymbol{\mu_-}) + \log\left(\frac{1}{p} - 1 \right)$.
+    \item \[P(y|\vx) = \frac{1}{1 + \exp(y\cdot(\vw^{\top}\vx+b))}\]
 \end{enumerate}
-
+ 
 %5
 \section{Linear regression: 14pts + 1pt}
+\centering
+\includegraphics[scale = 0.9]{linear_normal.png}
 
 \end{document}

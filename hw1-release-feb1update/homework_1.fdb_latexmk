@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber homework_1"] 1707225080.46152 "homework_1.bcf" "homework_1.bbl" "homework_1" 1707259242.23069 0
-  "homework_1.bcf" 1707259242 106450 b70b9d6197cac106e3c1a12a05e832e8 "pdflatex"
+["biber homework_1"] 1707291944.995 "homework_1.bcf" "homework_1.bbl" "homework_1" 1707292132.79288 0
+  "homework_1.bcf" 1707292132 106450 b70b9d6197cac106e3c1a12a05e832e8 "pdflatex"
   (generated)
   "homework_1.bbl"
   "homework_1.blg"
   (rewritten before read)
-["pdflatex"] 1707259240.93824 "c:/Users/bjung/Desktop/449/hw1-release-feb1update/homework_1.tex" "homework_1.pdf" "homework_1" 1707259242.2311 0
-  "c:/Users/bjung/Desktop/449/hw1-release-feb1update/homework_1.tex" 1707259240 4951 22f6bd38725358afea3e723daffb8b08 ""
+["pdflatex"] 1707292131.47029 "c:/Users/bjung/Desktop/449/hw1-release-feb1update/homework_1.tex" "homework_1.pdf" "homework_1" 1707292132.79335 0
+  "c:/Users/bjung/Desktop/449/hw1-release-feb1update/homework_1.tex" 1707292129 7340 3366a303eeca57b3dfaee65bcf379416 ""
   "c:/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1707009992 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy6.tfm" 1707007800 1124 14ccf5552bc7f77ca02a8a402bea8bfb ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy8.tfm" 1707007800 1120 200be8b775682cdf80acad4be5ef57e4 ""
@@ -38,17 +38,21 @@
   "c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmti12.tfm" 1707008831 1484 ed72f8f5cf654cda15ecc8e32bfcbee5 ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmtt12.tfm" 1707008831 772 9a936b7f5e2ff0557fce0f62822f0bbf ""
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb" 1707007800 32080 340ef9bf63678554ee606688e7b5339d ""
+  "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb" 1707007800 32166 b0c356b15f19587482a9217ce1d8fa67 ""
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb" 1707007800 36554 b67dc2cfa451409e100b3fcf5f506509 ""
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb" 1707007800 30251 6afa5cb1d0204815a708a080681d4674 ""
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb" 1707007800 36741 0ee9e374ec3e30da87cdfb0ea3575226 ""
+  "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb" 1707007800 37166 8ab3487cbe3ab49ebce74c29ea2418db ""
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb" 1707007800 35469 dcf3a5f2fc1862f5952e3ee5eb1d98c4 ""
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb" 1707007800 36912 b448ef9ad9d7228ec3c6e71005136d55 ""
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1707007800 32722 d7379af29a190c3f453aba36302ff5a9 ""
+  "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb" 1707007800 32734 69e00a6b65cedb993666e42eedb3d48f ""
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1707007800 32726 39f0f9e62e84beb801509898a605dbd5 ""
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1707007800 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1707007800 32626 5abc8bb2f28aa647d4c70f8ea38cc0d3 ""
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb" 1707007800 36118 fad905eba93cff5bce1e185fe980a177 ""
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb" 1707007800 24252 1e4e051947e12dfb50fee0b7f4e26e3a ""
+  "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy8.pfb" 1707007800 29407 8c6dfc0f2d83bfc4807c3b1dc90ef23e ""
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb" 1707007800 34694 870c211f62cb72718a00e353f14f254d ""
   "c:/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1707011981 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "c:/texlive/2023/texmf-dist/tex/generic/iftex/iftex.sty" 1707010692 7237 bdd120a32c8fdb4b433cf9ca2e7cd98a ""
@@ -201,11 +205,12 @@
   "c:/texlive/2023/texmf.cnf" 1707015364 713 e69b156964470283e0530f5060668171 ""
   "headerfooter.tex" 1706111810 264 26d52888f3a046be7dcb83d280e220d0 ""
   "homework.sty" 1706111810 2539 ec876d813e3acdfcdd0b3e8451d1ca81 ""
-  "homework_1.aux" 1707259242 834 2a2f20cc2737a36c928f02fd4a3d07c6 "pdflatex"
-  "homework_1.bbl" 1707225084 0 d41d8cd98f00b204e9800998ecf8427e "biber homework_1"
-  "homework_1.run.xml" 1707259242 2266 977e20c46faccdc6002497f43b72d626 "pdflatex"
-  "homework_1.tex" 1707259240 4951 22f6bd38725358afea3e723daffb8b08 ""
-  "homework_1.xsim" 1707259242 856 fbe1a71e2ca9b345b801697276de66fc "pdflatex"
+  "homework_1.aux" 1707292132 834 e446da4dda1411bae3be013d2d5ac3dd "pdflatex"
+  "homework_1.bbl" 1707291946 0 d41d8cd98f00b204e9800998ecf8427e "biber homework_1"
+  "homework_1.run.xml" 1707292132 2266 977e20c46faccdc6002497f43b72d626 "pdflatex"
+  "homework_1.tex" 1707292129 7340 3366a303eeca57b3dfaee65bcf379416 ""
+  "homework_1.xsim" 1707292132 856 fbe1a71e2ca9b345b801697276de66fc "pdflatex"
+  "linear_normal.png" 1707292032 21604 401547e046d87ed9357aa95857deb6e1 ""
   (generated)
   "homework_1.aux"
   "homework_1.bcf"
