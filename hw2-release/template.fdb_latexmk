@@ -1,12 +1,16 @@
 # Fdb version 4
-["biber template"] 0 "template.bcf" "template.bbl" "template" 1708443657.08281 -1
-  "template.bcf" 1708443656 106450 b70b9d6197cac106e3c1a12a05e832e8 "pdflatex"
+["biber template"] 0 "template.bcf" "template.bbl" "template" 1708494245.54494 -1
+  "template.bcf" 1708494245 106450 b70b9d6197cac106e3c1a12a05e832e8 "pdflatex"
   (generated)
   "template.bbl"
   "template.blg"
   (rewritten before read)
-["pdflatex"] 1708443655.76541 "c:/Users/bjung/Desktop/449/hw2-release/template.tex" "template.pdf" "template" 1708443657.08324 0
-  "c:/Users/bjung/Desktop/449/hw2-release/template.tex" 1708443655 7823 79b0ccb978a979c430642a74167c7944 ""
+["pdflatex"] 1708494244.07613 "c:/Users/bjung/Desktop/449/hw2-release/template.tex" "template.pdf" "template" 1708494245.54556 0
+  "Figure_1.png" 1708491145 28597 a4d5fca626a3e80b89fd2c4fa6e75984 ""
+  "Figure_2.png" 1708491155 39402 4354cde459036fd98456c3159e3f76bc ""
+  "Figure_3.png" 1708491162 58577 60ba528ab83529d3ddc9633be21e55fd ""
+  "Figure_4.png" 1708491169 37372 9a4c6a5a922b7679317713abcd1cf03c ""
+  "c:/Users/bjung/Desktop/449/hw2-release/template.tex" 1708494243 12765 d8f12e927a5baa084d33569da270fd38 ""
   "c:/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1707009992 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy6.tfm" 1707007800 1124 14ccf5552bc7f77ca02a8a402bea8bfb ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy8.tfm" 1707007800 1120 200be8b775682cdf80acad4be5ef57e4 ""
@@ -125,6 +129,7 @@
   "c:/texlive/2023/texmf-dist/tex/latex/base/article.cls" 1707011123 20144 147463a6a579f4597269ef9565205cfe ""
   "c:/texlive/2023/texmf-dist/tex/latex/base/ifthen.sty" 1707011123 5319 2b738d02ce36ada6dcdd9534940db0ee ""
   "c:/texlive/2023/texmf-dist/tex/latex/base/inputenc.sty" 1707011123 5048 425739d70251273bf93e3d51f3c40048 ""
+  "c:/texlive/2023/texmf-dist/tex/latex/base/omscmr.fd" 1707011123 2469 74341109f164f230581718c66211c718 ""
   "c:/texlive/2023/texmf-dist/tex/latex/base/size12.clo" 1707011123 8449 f07039d8e4e89f21078d9b5137579bfc ""
   "c:/texlive/2023/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx" 1707008300 1818 9ed166ac0a9204a8ebe450ca09db5dde ""
   "c:/texlive/2023/texmf-dist/tex/latex/biblatex/bbx/standard.bbx" 1707008300 25680 409c3f3d570418bc545e8065bebd0688 ""
@@ -203,11 +208,11 @@
   "c:/texlive/2023/texmf.cnf" 1707015364 713 e69b156964470283e0530f5060668171 ""
   "headerfooter.tex" 1707288946 257 070fc6b5e625b66af0ccfbd9141db8bd ""
   "homework.sty" 1707288946 2482 117fe9ffb029d6e53e1ed878aa5315bc ""
-  "template.aux" 1708443656 859 6eca07b8012ee33547f26f9f524d5efa "pdflatex"
+  "template.aux" 1708494245 1383 9306ee8119a72cfbca97fd95ec1484f6 "pdflatex"
   "template.bbl" 1708401238 0 d41d8cd98f00b204e9800998ecf8427e "biber template"
-  "template.run.xml" 1708443656 2252 418a74aef517fdc6506b9a21f228b005 "pdflatex"
-  "template.tex" 1708443655 7823 79b0ccb978a979c430642a74167c7944 ""
-  "template.xsim" 1708443656 856 fbe1a71e2ca9b345b801697276de66fc "pdflatex"
+  "template.run.xml" 1708494245 2252 418a74aef517fdc6506b9a21f228b005 "pdflatex"
+  "template.tex" 1708494243 12765 d8f12e927a5baa084d33569da270fd38 ""
+  "template.xsim" 1708494245 856 fbe1a71e2ca9b345b801697276de66fc "pdflatex"
   (generated)
   "template.aux"
   "template.bcf"
