@@ -32,16 +32,41 @@ Please refer to \url{https://courses.grainger.illinois.edu/cs446/sp2024/homework
     \item   \[w_0 = [1, -1]^{\top}, \, w_1 = [m, -m]^{\top}, \, b = [\frac{b}{m}, -\frac{b}{m}]^{\top}\]
     \item   \[w_0 = 0, \, w_1 = 2b\]
     \item   \[w_0 = [1, 1, 1]^{\top}, \, b_0 = [2, 0,-2]^{\top}, \, w_1 = [3, -6, 3]^{\top}\]
-    \item   No. 
+    \item   No. $x^2 = |x|^2$, while any transformation in $f(x)$ is either making linear transforms ($w$), or resulting in 0 ($\sigma$), in which $0 \leq |x|$. Any combination of them is impossible to produce a quadratic transform.
+    \item   
+    \item 
 \end{enumerate}
 \newpage
 
 \section{Backpropagation through time (BPTT)}
-
+\begin{enumerate}
+    \item \begin{figure}[!htb]
+        
+    \end{figure}
+    \item   \[h_0 = 0, \, h_1 = w(x_1 + h_0) = wx_1, \, h_2 = w(x_2 + h_1) = wx_2 + w^2x_1,\] 
+    \[h_3 = w(x_3 + h_2) = wx_3 + w^2x_2 + w^3x_1\]
+    \[y_1 = x_1 + h_0 = x_1, \, y_2 = x_2 + h_1 = x_2 + wx_1, \, y_3 = x_3 + h_2 = x_3 + wx_2 + w^2x_1\]
+    \item    \[\frac{\partial h_3}{\partial w} = x_3 + (h_2 + w\frac{\partial h_2}{\partial w}) = x_3 + wx_2 + w^2x_1 + w[x_2 + (h_1 + w\frac{\partial h_1}{\partial w})]\] 
+    \[= x_3 + 2wx_2 + 2w^2x_1 + w^2(\frac{\partial h_1}{\partial w}) = x_3 + 2wx_2 + 3w^2x_1\]
+    \item    \[\frac{\partial f}{\partial h_1} = \frac{\partial h_T}{\partial h_1} = \]
+    \item    \[\]
+\end{enumerate}
 \newpage
 
 \section{Transformers}
+\begin{enumerate}
+    \item Theoretially $\alpha_i$ can't be infinitely large since attention weights are suuposed to be designed between 0 and 1. Practically the numerator in $\alpha_i$ would be less then denominator, and both of them can't reach 0 due to exponentials. In this way, $\alpha_i$ can neither be neither infinitely large nor be 0.
+    \item $q$ and $k_i$ are pointing to similiar directions, which differs from the rest $k$. $c = \sum \alpha_i v_i$ for all $i$ satisfiying such condition. This means that the token corresponding to $q$ here is attached with greater attention to tokens corresponding to such $i$.
+    \item 
+    \item 
+    \item 
+\end{enumerate}
+\newpage
 
+\section{Resnet}
+\begin{enumerate}
+    \item[2.] 
+\end{enumerate}
 \newpage
 
 \section{Coding: Image overfitting}
@@ -66,7 +91,7 @@ Please refer to \url{https://courses.grainger.illinois.edu/cs446/sp2024/homework
         \item batch size = 800
     \end{enumerate}
 
-    \item[6.] fdsaf
+    \item[6.] 
     \item[7.] 
     \item[8.] 
         
