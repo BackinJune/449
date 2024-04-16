@@ -75,10 +75,17 @@ Please refer to \url{https://courses.grainger.illinois.edu/cs446/sp2024/homework
     \[\frac{\partial r}{\partial \textbf{\textit{x}}_{t-1}} = \frac{-\sqrt{1-\beta_t}\textbf{\textit{x}}_t + (1-\beta_t)\textbf{\textit{x}}_{t-1}}{\beta_t} + \frac{-\sqrt{1-\overline{\beta}_{t-1}}\textbf{\textit{x}}_{0} + \textbf{\textit{x}}_{t-1}}{\overline{\beta}_{t-1}} = 0\]
     \[\Rightarrow \frac{\beta_t+\overline{\beta}_{t-1}-\beta_t\overline{\beta}_{t-1}}{\beta_t\overline{\beta}_{t-1}}\textbf{\textit{x}}_{t-1} = \left(\frac{\sqrt{1-\beta_t}\textbf{\textit{x}}_t}{\beta_t} + \frac{\sqrt{1-\overline{\beta}_{t-1}}\textbf{\textit{x}}_0}{\overline{\beta}_{t-1}}\right)\]
     \[\Rightarrow \mu_\theta(\textbf{\textit{x}}_t,\textbf{\textit{x}}_0) = \textbf{\textit{x}}_{t-1} = \frac{\overline{\beta}_{t-1}\sqrt{1-\beta_t}\textbf{\textit{x}}_t + \beta_t\sqrt{1-\overline{\beta}_{t-1}}\textbf{\textit{x}}_0}{\beta_t+\overline{\beta}_{t-1}-\beta_t\overline{\beta}_{t-1}}\]
+    \newpage
 
     \item According to Bayes' rule, 
     \[\log p_\theta(\textbf{\textit{x}},\delta|\textbf{\textit{x}}_\text{known}) = \log\frac{p(\textbf{\textit{x}}_\text{known}|\textbf{\textit{x}})p_\theta(\textbf{\textit{x}},\delta)}{p(\textbf{\textit{x}}_\text{known})}\] 
     \[= \log p(\textbf{\textit{x}}_\text{known}|\textbf{\textit{x}}) + \log p_\theta(\textbf{\textit{x}},\delta) - \log p(\textbf{\textit{x}}_\text{known})\]
+    Hence we have:
+    \[\nabla_\textbf{\textit{x}}\log p_\theta(\textbf{\textit{x}}|\textbf{\textit{x}}_\text{known}) = \nabla_\textbf{\textit{x}}\log p(\textbf{\textit{x}}_\text{known}|\textbf{\textit{x}}) + \nabla_\textbf{\textit{x}}\log p_\theta(\textbf{\textit{x}},\delta) - \nabla_\textbf{\textit{x}}\log p(\textbf{\textit{x}}_\text{known})\]
+    \[= \nabla_\textbf{\textit{x}}\log p(\textbf{\textit{x}}_\text{known}|\textbf{\textit{x}}) + \nabla_\textbf{\textit{x}}\log p_\theta(\textbf{\textit{x}},\delta)\]
+    Since $p(\textbf{\textit{x}}_\text{known}|\textbf{\textit{x}})\propto\exp(-\|\textbf{\textit{x}}-\textbf{\textit{x}}_\text{known}\odot\textbf{\textit{M}}\|^2_2)$:
+    \[s_\theta(\textbf{\textit{x}},\delta|\textbf{\textit{x}}_\text{known}) = \nabla_\textbf{\textit{x}}\log p_\theta(\textbf{\textit{x}}|\textbf{\textit{x}}_\text{known}) = \nabla_\textbf{\textit{x}}(-\|\textbf{\textit{x}}-\textbf{\textit{x}}_\text{known}\odot\textbf{\textit{M}}\|_2^2) + \nabla_\textbf{\textit{x}}\log p_\theta(\textbf{\textit{x}},\delta)\]
+    \[= s_\theta(\textbf{\textit{x}},\delta) - \nabla_\textbf{\textit{x}}\|\textbf{\textit{x}}-\textbf{\textit{x}}_\text{known}\odot\textbf{\textit{M}}\|_2^2\]
 \end{enumerate}
 \newpage
 

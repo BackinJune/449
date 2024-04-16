@@ -22,13 +22,27 @@ class DNet(nn.Module):
         super(DNet, self).__init__()
         
         # TODO: implement layers here
-        pass
+        self.before = nn.Sequential(
+            nn.Conv2d(3, 2, 3, 1, 1),
+            nn.ReLU(),
+            nn.MaxPool2d(2, 2, ),
+            nn.Conv2d(2, 4, 3, 1, 1),
+            nn.ReLU(),
+            nn.MaxPool2d(2, 2),
+            nn.Conv2d(4, 8, 3, 1, 0),
+            nn.ReLU()
+        )
+        self.final = nn.Linear(1568, 1) ### input features to be done
 
         self._weight_init()
 
     def _weight_init(self):
         # TODO: implement weight initialization here
-        pass
+        for layer in self.modules():
+            if hasattr(layer, "weight"):
+                nn.init.kaiming_uniform(layer.weight)
+            if hasattr(layer, "bias") and layer.bias is not None:
+                nn.init.zeros_(layer.bias)
 
     def forward(self, x):
         # TODO: complete forward function
@@ -47,12 +61,19 @@ class GNet(nn.Module):
         super(GNet, self).__init__()
 
         # TODO: implement layers here
+        self.before = nn.Sequential(
+            nn.Linear()
+        )
 
         self._weight_init()
 
     def _weight_init(self):
         # TODO: implement weight initialization here
-        pass
+        for layer in self.modules():
+            if hasattr(layer, "weight"):
+                nn.init.kaiming_uniform(layer.weight)
+            if hasattr(layer, "bias") and layer.bias is not None:
+                nn.init.zeros_(layer.bias)
 
     def forward(self, z):
         """
