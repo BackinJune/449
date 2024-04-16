@@ -30,26 +30,64 @@ Please refer to \url{https://courses.grainger.illinois.edu/cs446/sp2024/homework
 \begin{enumerate}
     \item The problem will be:
     \[\max_{\mathcal{D}}\mathbb{E}_{x \sim p_r(x)}[\log\mathcal{D}(x)] + \mathbb{E}_{x \sim p_g(x)}[\log(1-\mathcal{D}(x))] \]
-    Hence, under the given $x$, the optimal choice of $\mathcal{D}(x)$ is:
-    \[\mathcal{D}(x) = \frac{p_r(x)}{p_r(x) + p_g(x)}\]
+    which is equivalent to maximize:
+    \[\int p_r(x)\log\mathcal{D}(x)+ p_g(x)\log(1-\mathcal{D}(x))\,dx\]
+    Hence, the optimal choice of $\mathcal{D}(x)$ is:
+    \[\mathcal{D}^*(x) = \frac{p_r(x)}{p_r(x) + p_g(x)}\]
 
     \item Plugged in the optimal $\mathcal{D}(x)$, Eq. 1 will turn into:
     \[\min_{\mathcal{G}}\mathbb{E}_{x \sim p_r(x)}\left[\log\frac{p_r(x)}{p_r(x) + p_g(x)}\right] + \mathbb{E}_{x \sim p_g(x)}\left[\log\frac{p_g(x)}{p_r(x) + p_g(x)}\right]\]
+    which is equivalent to minimize:
+    \[\int p_r(x)\log\frac{p_r(x)}{p_r(x) + p_g(x)}\,dx + \int p_g(x)\log\frac{p_g(x)}{p_r(x) + p_g(x)}\,dx\]
+    \[= D_{\text{KL}}(p_r(x)\|p_r(x)+p_g(x)) + D_{\text{KL}}(p_g(x)\|p_r(x)+p_g(x))\]
+    \[= 2D_{\text{JS}}(p_r(x);p_g(x))\]
+    Therefore, when $\mathcal{D}$ reaches optimal, optimizing Eq. 1 is the same as minimizing $D_{\text{JS}}(p_r(x);p_g(x))$.
 
     \item When $\mathcal{D}$ perfectly classifies generated samples, the output of $\mathcal{D}$ will saturate and the gradient of $\mathcal{D}$ will be almost 0, which makes the gradient of $\mathcal{G}$ almost 0 as well.
 \end{enumerate}
 \newpage
 
 \section{Diffusion model: 11pts}
+\begin{enumerate}
+    \item \[\text{ELBO}_{\theta}(\textbf{\textit{x}}_0) = \sum_{t=1}^{T}\frac{1}{2\sigma^2}\frac{\beta_{t}(1-\overline{\beta}_{t-1})}{\overline{\beta}_{t}^{2}}\mathbb{E}_{q(\textbf{\textit{x}}_t|\textbf{\textit{x}}_0)}\left[\|\hat{\textbf{\textit{x}}}_{\theta}(\textbf{\textit{x}}_t)-\textbf{\textit{x}}_0\|_2^2\right]\]
+    
+    where $\overline{\beta}_t := 1 - \prod_{i=1}^{t}(1-\beta_i)$.
+    \item No, because $p_{\theta}(\cdot)$ represent the reconstruction process from random noise in diffusion models and thus cannot directly give the likelihood of an existing test sample.
+    
+    \item \[q(\textbf{\textit{x}}_t|\textbf{\textit{x}}_0) = \prod_{i=1}^{t}q(\textbf{\textit{x}}_i|\textbf{\textit{x}}_{i-1}) = \prod_{i=1}^{t}\mathcal{N}(\textbf{\textit{x}}_i;\sqrt{1-\beta_i}\textbf{\textit{x}}_{i-1},\beta_i\textbf{I})\]
+    \[\textbf{\textit{x}}_t = \sqrt{1 - \beta_t}\textbf{\textit{x}}_{t-1} + \sqrt{\beta_t}\bm{\epsilon}_{t-1} = \sqrt{1 - \beta_t}\sqrt{1 - \beta_{t-1}}\textbf{\textit{x}}_{t-2} + \sqrt{\beta_t}\bm{\epsilon}_{t-1} + \sqrt{1 - \beta_t}\sqrt{\beta_{t-1}}\bm{\epsilon}_{t-2}\]
+    We can estimate covariance of the new Gaussian noise $\sqrt{\beta_t}\bm{\epsilon}_{t-1} + \sqrt{1 - \beta_t}\sqrt{\beta_{t-1}}\bm{\epsilon}_{t-2}$:
+    \[\bm{\sigma}_{t-2} = [(\sqrt{\beta_t})^2 + (\sqrt{1 - \beta_t}\sqrt{\beta_{t-1}})^2]\mathbf{I} = [\beta_t + \beta_{t-1} - \beta_t\beta_{t-1}]\mathbf{I} = [1-(1-\beta_t)(1-\beta_{t-1})]\mathbf{I}\]
+    and thus:
+    \[\textbf{\textit{x}}_t = \sqrt{(1-\beta_t)(1-\beta_{t-1})}\textbf{\textit{x}}_{t-2} + \sqrt{1 - (1-\beta_t)(1-\beta_{t-1})}\bm{\epsilon}_{t-2}\]
+    \[= \sqrt{(1-\beta_t)(1-\beta_{t-1})(1-\beta_{t-2})}\textbf{\textit{x}}_{t-3} + \sqrt{1 - (1-\beta_t)(1-\beta_{t-1})(1-\beta_{t-2})}\bm{\epsilon}_{t-3}\]
+    \[=\dots=\sqrt{\prod_{i=1}^{t}(1-\beta_i)}\textbf{\textit{x}}_0 + \sqrt{1-\prod_{i=1}^{t}(1-\beta_i)}\bm{\epsilon}_0\]
+    \[= \sqrt{1-\overline{\beta}_t}\textbf{\textit{x}}_0 + \sqrt{\overline{\beta}_t}\bm{\epsilon}_0\]
+    where $\overline{\beta}_t := 1 - \prod_{i=1}^{t}(1-\beta_i)$. Hence, as $\textbf{\textit{x}}_t\sim q(\textbf{\textit{x}}_t|\textbf{\textit{x}}_0)$, we have:
+    \[q(\textbf{\textit{x}}_t|\textbf{\textit{x}}_0) = \mathcal{N}(\textbf{\textit{x}}_t | \sqrt{1-\overline{\beta}_t}\textbf{\textit{x}}_0,\,\overline{\beta}_t\mathbf{I})\]
+    \[\overline{\beta}_t := 1 - \prod_{i=1}^{t}(1-\beta_i)\]
+    \newpage
 
+    \item From the last question we can get:
+    \[q(\textbf{\textit{x}}_t|\textbf{\textit{x}}_{t-1},\textbf{\textit{x}}_0)\frac{q(\textbf{\textit{x}}_{t-1}|\textbf{\textit{x}}_0)}{q(\textbf{\textit{x}}_t|\textbf{\textit{x}}_0)} = \mathcal{N}(\textbf{\textit{x}}_t | \sqrt{1-\beta_t}\textbf{\textit{x}}_{t-1},\,\beta_t\mathbf{I})\frac{\mathcal{N}(\textbf{\textit{x}}_{t-1} | \sqrt{1-\overline{\beta}_{t-1}}\textbf{\textit{x}}_0,\,\overline{\beta}_{t-1}\mathbf{I})}{\mathcal{N}(\textbf{\textit{x}}_t | \sqrt{1-\overline{\beta}_t}\textbf{\textit{x}}_0,\,\overline{\beta}_t\mathbf{I})}\]
+    \[\propto\exp\left(\frac{(\textbf{\textit{x}}_t - \sqrt{1-\beta_t}\textbf{\textit{x}}_{t-1})^2}{2\beta_t} + \frac{\left(\textbf{\textit{x}}_{t-1} - \sqrt{1-\overline{\beta}_{t-1}}\textbf{\textit{x}}_0\right)^2}{2\overline{\beta}_{t-1}} - \frac{\left(\textbf{\textit{x}}_{t} - \sqrt{1-\overline{\beta}_{t}}\textbf{\textit{x}}_0\right)^2}{2\overline{\beta}_{t}}\right)\]
+    Denote the polynomial in the above exponential as $r(\textbf{\textit{x}}_{t-1}, \textbf{\textit{x}}_t, \textbf{\textit{x}}_0)$. Since $q(\textbf{\textit{x}}_{t-1}|\textbf{\textit{x}}_t,\textbf{\textit{x}}_0)$ is a Gaussian distribution, minimize $r$ with respect to $\textbf{\textit{x}}_{t-1}$ should lead to the mean $\mu_\theta(\textbf{\textit{x}}_t,\textbf{\textit{x}}_0)$. Hence, taking derivative of $r$ with respect to $\textbf{\textit{x}}_{t-1}$:
+    \[\frac{\partial r}{\partial \textbf{\textit{x}}_{t-1}} = \frac{-\sqrt{1-\beta_t}\textbf{\textit{x}}_t + (1-\beta_t)\textbf{\textit{x}}_{t-1}}{\beta_t} + \frac{-\sqrt{1-\overline{\beta}_{t-1}}\textbf{\textit{x}}_{0} + \textbf{\textit{x}}_{t-1}}{\overline{\beta}_{t-1}} = 0\]
+    \[\Rightarrow \frac{\beta_t+\overline{\beta}_{t-1}-\beta_t\overline{\beta}_{t-1}}{\beta_t\overline{\beta}_{t-1}}\textbf{\textit{x}}_{t-1} = \left(\frac{\sqrt{1-\beta_t}\textbf{\textit{x}}_t}{\beta_t} + \frac{\sqrt{1-\overline{\beta}_{t-1}}\textbf{\textit{x}}_0}{\overline{\beta}_{t-1}}\right)\]
+    \[\Rightarrow \mu_\theta(\textbf{\textit{x}}_t,\textbf{\textit{x}}_0) = \textbf{\textit{x}}_{t-1} = \frac{\overline{\beta}_{t-1}\sqrt{1-\beta_t}\textbf{\textit{x}}_t + \beta_t\sqrt{1-\overline{\beta}_{t-1}}\textbf{\textit{x}}_0}{\beta_t+\overline{\beta}_{t-1}-\beta_t\overline{\beta}_{t-1}}\]
+
+    \item According to Bayes' rule, 
+    \[\log p_\theta(\textbf{\textit{x}},\delta|\textbf{\textit{x}}_\text{known}) = \log\frac{p(\textbf{\textit{x}}_\text{known}|\textbf{\textit{x}})p_\theta(\textbf{\textit{x}},\delta)}{p(\textbf{\textit{x}}_\text{known})}\] 
+    \[= \log p(\textbf{\textit{x}}_\text{known}|\textbf{\textit{x}}) + \log p_\theta(\textbf{\textit{x}},\delta) - \log p(\textbf{\textit{x}}_\text{known})\]
+\end{enumerate}
 \newpage
 
 \section{Unsupervised learning / contrastive learning: 4 pts}
 \begin{enumerate}
     \item True.
-    \item False. MAE is an approach for computer vision.
-    \item to be done 
-    \item False. CLIP enables zero-shot classification with contrastive pre-training.
+    \item False. MAE is an approach for computer vision, and the mask-out rate can vary greatly.
+    \item True.
+    \item False. CLIP does enable zero-shot classification with contrastive pre-training.
 \end{enumerate}
 \newpage
 
