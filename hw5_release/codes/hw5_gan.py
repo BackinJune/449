@@ -23,16 +23,16 @@ class DNet(nn.Module):
         
         # TODO: implement layers here
         self.before = nn.Sequential(
-            nn.Conv2d(3, 2, 3, 1, 1),
+            nn.Conv2d(1, 2, 3, 1, 1), # 28 * 28
             nn.ReLU(),
-            nn.MaxPool2d(2, 2, ),
-            nn.Conv2d(2, 4, 3, 1, 1),
+            nn.MaxPool2d(2, 2), # output: 14 * 14
+            nn.Conv2d(2, 4, 3, 1, 1), # 14 * 14
             nn.ReLU(),
-            nn.MaxPool2d(2, 2),
-            nn.Conv2d(4, 8, 3, 1, 0),
+            nn.MaxPool2d(2, 2), # output: 7 * 7
+            nn.Conv2d(4, 8, 3, 1, 0), # output: 5 * 5
             nn.ReLU()
         )
-        self.final = nn.Linear(1568, 1) ### input features to be done
+        self.final = nn.Linear(200, 1) # input: 8 * 5 * 5 = 200
 
         self._weight_init()
 
@@ -40,14 +40,15 @@ class DNet(nn.Module):
         # TODO: implement weight initialization here
         for layer in self.modules():
             if hasattr(layer, "weight"):
-                nn.init.kaiming_uniform(layer.weight)
+                nn.init.kaiming_uniform_(layer.weight)
             if hasattr(layer, "bias") and layer.bias is not None:
                 nn.init.zeros_(layer.bias)
 
     def forward(self, x):
         # TODO: complete forward function
-        pass
-
+        x = self.before(x)
+        x = x.view(x.size(0), -1)
+        return self.final(x)
 
 class GNet(nn.Module):
     """This is generator network."""
@@ -62,7 +63,19 @@ class GNet(nn.Module):
 
         # TODO: implement layers here
         self.before = nn.Sequential(
-            nn.Linear()
+            nn.Linear(zdim, 1568),
+            nn.LeakyReLU(0.2),
+            
+        )
+        self.after = nn.Sequential(
+            nn.Upsample(scale_factor=2),
+            nn.Conv2d(32, 16, 3, 1, 1),
+            nn.LeakyReLU(0.2),
+            nn.Upsample(scale_factor=2),
+            nn.Conv2d(16, 8, 3, 1, 1),
+            nn.LeakyReLU(0.2),
+            nn.Conv2d(8, 1, 3, 1, 1),
+            nn.Sigmoid()
         )
 
         self._weight_init()
@@ -71,7 +84,7 @@ class GNet(nn.Module):
         # TODO: implement weight initialization here
         for layer in self.modules():
             if hasattr(layer, "weight"):
-                nn.init.kaiming_uniform(layer.weight)
+                nn.init.kaiming_uniform_(layer.weight)
             if hasattr(layer, "bias") and layer.bias is not None:
                 nn.init.zeros_(layer.bias)
 
@@ -82,7 +95,9 @@ class GNet(nn.Module):
             z: latent variables used to generate images.
         """
         # TODO: complete forward function
-        pass
+        z = self.before(z)
+        z = z.view(z.size(0), 32, 7, 7)
+        return self.after(z)
 
 
 class GAN:
@@ -109,7 +124,14 @@ class GAN:
             z: random latent variable.
         """
         # TODO: implement discriminator's loss function
-        pass
+        # print("batch size:", batch_size)
+        # print("batch data:", batch_data.size())
+        # print("z:", z.size())
+        loss_fn = nn.BCEWithLogitsLoss()
+        result = torch.cat((self.disc(batch_data), self.disc(self.gen(z)))).view(-1)
+        target = torch.cat((torch.ones(batch_size), torch.zeros(batch_size))).to(device=self._dev)
+        return loss_fn(result, target)
+        
 
     def _get_loss_g(self, batch_size, z):
         """This function computes loss for generator.
@@ -120,7 +142,10 @@ class GAN:
             z: random latent variable.
         """
         # TODO: implement generator's loss function
-        pass
+        loss_fn = nn.BCEWithLogitsLoss()
+        result = self.disc(self.gen(z)).view(-1)
+        target = torch.ones(batch_size).to(device=self._dev)
+        return loss_fn(result, target)
 
     def train(self, iter_d=1, iter_g=1, n_epochs=100, batch_size=256, lr=0.0002):
 

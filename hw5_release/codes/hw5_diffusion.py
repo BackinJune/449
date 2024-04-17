@@ -7,6 +7,7 @@ import torch.optim as optim
 from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
+from tqdm import tqdm
 
 from hw5_utils import create_samples, generate_sigmas, plot_score
 
@@ -20,7 +21,16 @@ class ScoreNet(nn.Module):
         # The network has n_layers of linear layers. 
         # Latent dimensions are specified with latent_dim.
         # Between each two linear layers, we use Softplus as the activation layer.
-        self.net = nn.Identity()
+        assert n_layers >= 2
+
+        nn_list = [nn.Linear(3, latent_dim), nn.Softplus()]
+        for _ in range(n_layers-2):
+            nn_list.append(nn.Linear(latent_dim, latent_dim))
+            nn_list.append(nn.Softplus())
+        nn_list.append(nn.Linear(latent_dim, 2))
+        # nn_list.append(nn.Softplus())
+
+        self.net = nn.Sequential(*nn_list)
 
     def forward(self, x, sigmas):
         """.
@@ -38,7 +48,7 @@ class ScoreNet(nn.Module):
         return self.net(torch.concatenate([x, sigmas], dim=-1)) / sigmas
 
 
-def compute_denoising_loss(scorenet, training_data, sigmas):
+def compute_denoising_loss(scorenet: ScoreNet, training_data, sigmas):
     """
     Compute the denoising loss.
 
@@ -67,7 +77,19 @@ def compute_denoising_loss(scorenet, training_data, sigmas):
     # 4. Compute the loss: 1/2 * lambda * ||score + ((\tilde(x) - x) / sigma^2)||^2
     # Return the loss averaged over all training samples
     # Note: use batch operations as much as possible to avoid iterations
-    pass
+    if not torch.is_tensor(sigmas):
+        sigmas = torch.tensor(sigmas)
+    if not torch.is_tensor(training_data):
+        training_data = torch.tensor(training_data)
+
+    sampled_sigmas = sigmas[torch.multinomial(sigmas, B, replacement=True)] # (N,)
+    lambdas = sampled_sigmas ** 2 # (N,)
+    noisy_xs = training_data + sampled_sigmas.view(-1, 1) * torch.randn((B, C)) # (N, 2)
+    scores = scorenet.forward(noisy_xs, sampled_sigmas.view(-1, 1)) # (N, 2)
+    to_be_normed = scores + (noisy_xs - training_data) / lambdas.view(-1, 1)
+    losses = 1/2 * lambdas * torch.norm(to_be_normed, p=2, dim=1)**2
+
+    return torch.mean(losses)
 
 
 @torch.no_grad()
@@ -110,14 +132,29 @@ def langevin_dynamics_sample(scorenet, n_samples, sigmas, iterations=100, eps=0.
     # 5.        x_t = x_{t-1} + alpha * scorenet(x_{t-1}, sigma) + sqrt(2 * alpha) * z
     # 6.    x_0 = x_T
     # 7. Return the last x_T if return_traj=False, or return all x_t
-    pass
+    x_Ts = []
+    for n in tqdm(range(n_samples)):
+        x_Ts.append([torch.randn(2)])
+        for sigma in sigmas:
+            alpha = eps * sigma**2 / sigmas[-1]**2
+            for _ in range(iterations):
+                x_Ts[n][-1] = x_Ts[n][-1] + alpha * scorenet(x_Ts[n][-1].view(1, -1), sigma.view(1, -1)).view(-1) + torch.sqrt(2*alpha) * torch.randn(2)
+                x_Ts[n].append(x_Ts[n][-1])
+        x_Ts[n].pop()
+
+    if return_traj:
+        return torch.stack([torch.stack(i) for i in x_Ts])
+    else:
+        return x_Ts[-1]
 
 
 def main():
     # training related hyperparams
     lr = 0.01
     n_iters = 50000
+    # n_iters = 20000
     log_freq = 1000
+    # log_freq = 100
 
     # sampling related hyperparams
     n_samples = 1000
@@ -158,7 +195,8 @@ def main():
             avg_loss = 0.
 
     torch.save(scorenet.state_dict(), 'model.ckpt')
-    
+    # scorenet.load_state_dict(torch.load('model.ckpt'))
+
     # Q5(a). visualize score function
     scorenet.eval()
     plot_score(scorenet, training_data)

@@ -83,9 +83,10 @@ Please refer to \url{https://courses.grainger.illinois.edu/cs446/sp2024/homework
     Hence we have:
     \[\nabla_\textbf{\textit{x}}\log p_\theta(\textbf{\textit{x}}|\textbf{\textit{x}}_\text{known}) = \nabla_\textbf{\textit{x}}\log p(\textbf{\textit{x}}_\text{known}|\textbf{\textit{x}}) + \nabla_\textbf{\textit{x}}\log p_\theta(\textbf{\textit{x}},\delta) - \nabla_\textbf{\textit{x}}\log p(\textbf{\textit{x}}_\text{known})\]
     \[= \nabla_\textbf{\textit{x}}\log p(\textbf{\textit{x}}_\text{known}|\textbf{\textit{x}}) + \nabla_\textbf{\textit{x}}\log p_\theta(\textbf{\textit{x}},\delta)\]
-    Since $p(\textbf{\textit{x}}_\text{known}|\textbf{\textit{x}})\propto\exp(-\|\textbf{\textit{x}}-\textbf{\textit{x}}_\text{known}\odot\textbf{\textit{M}}\|^2_2)$:
-    \[s_\theta(\textbf{\textit{x}},\delta|\textbf{\textit{x}}_\text{known}) = \nabla_\textbf{\textit{x}}\log p_\theta(\textbf{\textit{x}}|\textbf{\textit{x}}_\text{known}) = \nabla_\textbf{\textit{x}}(-\|\textbf{\textit{x}}-\textbf{\textit{x}}_\text{known}\odot\textbf{\textit{M}}\|_2^2) + \nabla_\textbf{\textit{x}}\log p_\theta(\textbf{\textit{x}},\delta)\]
-    \[= s_\theta(\textbf{\textit{x}},\delta) - \nabla_\textbf{\textit{x}}\|\textbf{\textit{x}}-\textbf{\textit{x}}_\text{known}\odot\textbf{\textit{M}}\|_2^2\]
+    Since $p(\textbf{\textit{x}}_\text{known}|\textbf{\textit{x}})\propto\exp(-\|(\textbf{\textit{x}}-\textbf{\textit{x}}_\text{known})\odot\textbf{\textit{M}}\|^2_2)$:
+    \[s_\theta(\textbf{\textit{x}},\delta|\textbf{\textit{x}}_\text{known}) = \nabla_\textbf{\textit{x}}\log p_\theta(\textbf{\textit{x}}|\textbf{\textit{x}}_\text{known}) = \nabla_\textbf{\textit{x}}(-\|(\textbf{\textit{x}}-\textbf{\textit{x}}_\text{known})\odot\textbf{\textit{M}}\|_2^2) + \nabla_\textbf{\textit{x}}\log p_\theta(\textbf{\textit{x}},\delta)\]
+    \[= s_\theta(\textbf{\textit{x}},\delta) - \nabla_\textbf{\textit{x}}\|(\textbf{\textit{x}}-\textbf{\textit{x}}_\text{known})\odot\textbf{\textit{M}}\|_2^2\]
+    \[= s_\theta(\textbf{\textit{x}},\delta) - 2(\textbf{\textit{x}} - \textbf{\textit{x}}_\text{known})\odot\textbf{\textit{M}}\]
 \end{enumerate}
 \newpage
 
@@ -99,9 +100,64 @@ Please refer to \url{https://courses.grainger.illinois.edu/cs446/sp2024/homework
 \newpage
 
 \section{Coding: GAN, 10pts}
-
+\begin{figure}[!ht]
+    \centering
+    \includegraphics{test_30}
+    \caption{Tests after 30 epochs}
+\end{figure}
+\begin{figure}[!ht]
+    \centering
+    \includegraphics{test_60}
+    \caption{Tests after 60 epochs}
+\end{figure}
+\begin{figure}[!ht]
+    \centering
+    \includegraphics{test_90}
+    \caption{Tests after 90 epochs}
+\end{figure}
 \newpage
 
 \section{Coding: Diffusion model, 10pts}
+\begin{enumerate}
+    \item[(a)] Visualization of the score function:
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\linewidth]{score}
+    \end{figure}
+    \item[(b)] Six plots in total (Figure 4 to 9):
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\linewidth]{step_200}
+        \caption{Points at time step 200}
+    \end{figure}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\linewidth]{step_400}
+        \caption{Points at time step 400}
+    \end{figure}
+    \newpage
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\linewidth]{step_600}
+        \caption{Points at time step 600}
+    \end{figure}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\linewidth]{step_800}
+        \caption{Points at time step 800}
+    \end{figure}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\linewidth]{final}
+        \caption{Final sampled points}
+    \end{figure}
+    \newpage
 
+    \item[(c)] Visualization of the trajectory of langevin dynamics:
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=\linewidth]{trajs}
+    \end{figure}
+    
+\end{enumerate}
 \end{document}
